@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Vian Chen, 2019
-# distributed under MIT license
-
 # 1 -> pink noise
 # 2 -> brown
 # 3 -> laplace
