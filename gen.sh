@@ -19,14 +19,14 @@ function execute() {
     done
 }
 
-rm "$OUTPUT_FILE" 2>/dev/null
-
 echo 'Compiling signal generators with gcc...'
 mkdir build 2>/dev/null
 cd build
 cmake ../src
 make
 cd ../dist
+
+rm "$OUTPUT_FILE" 2>/dev/null
 
 echo 'Generating with pinkgen...'
 execute './pinkgen 10 1000 1.0' 1
