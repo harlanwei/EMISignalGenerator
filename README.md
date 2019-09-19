@@ -1,6 +1,14 @@
-# An EMI Signal Generator
+# ESG: an EMI Signal Generator
 
-Make sure you have `cmake`, `make` and `gcc` (or `clang`) installed on your machine. To generate all of the EMI signals used by our thesis, simply run
+## Usage
+
+Make sure you have `bash`, `cmake`, `make` and `gcc` (or `clang`) installed on your machine (on a Windows machine, use WSL). To generate all of the EMI signals used by our thesis, simply run
+
+```bash
+bash ./gen.sh 1000 1000 1000 1000 1000
+```
+
+To see what each parameter means, run
 
 ```bash
 bash ./gen.sh
