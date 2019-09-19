@@ -29,9 +29,8 @@ function execute() {
 echo 'Compiling signal generators with gcc...'
 mkdir build 2>/dev/null
 cd build
-# redirect to /dev/null just to make them shut up
-cmake ../build > /dev/null
-make --quiet > /dev/null
+cmake ../src
+make
 cd ../dist
 
 rm "$OUTPUT_FILE" 2>/dev/null
