@@ -2,10 +2,16 @@
 
 ## Usage
 
-Make sure you have `bash`, `cmake`, `make` and `gcc` (or `clang`) installed on your machine (on a Windows machine, use WSL). To generate all of the EMI signals used by our thesis, simply run
+Make sure you have `bash`, `make` and `gcc` installed on your machine (on a Windows machine, use WSL). To generate all of the EMI signals used by our thesis, simply run
 
 ```bash
-bash ./gen.sh 1000 1000 1000 1000 1000 # seems kinda messy, but you get the idea
+bash ./gen.sh 1000 1000 1000 1000 1000 # one for each kind of signal, assigns how many data points you want for that kind
+```
+
+... or just:
+
+```bash
+bash ./gen.sh 1000 # same amount of data for each kind
 ```
 
 To see what each parameter means, run

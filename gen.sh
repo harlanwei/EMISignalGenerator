@@ -6,19 +6,22 @@
 # 4 -> uniformrv
 # 5 -> exponentialrv
 
-USAGE_STRING="Usage: bash $0 [pink] [brown] [laplace] [uniform] [exponential]"
-OUTPUT_FILE="../data.txt"
+USAGE_STRING="Usage:
+    bash $0 [pink] [brown] [laplace] [uniform] [exponential]
+or
+    bash $0 [length]"
+OUTPUT_FILE='../data.txt'
 SAMPLE_LENGTH=1000
-if [ -z "$1" ]; then echo $USAGE_STRING && exit 0; else pink_count=$1; fi
-if [ -z "$2" ]; then brown_count=0; else brown_count=$2; fi
-if [ -z "$3" ]; then laplace_count=0; else laplace_count=$3; fi
-if [ -z "$4" ]; then uniform_count=0; else uniform_count=$4; fi
-if [ -z "$5" ]; then exponential_count=0; else exponential_count=$5; fi
+
+function print_usage {
+    echo "$USAGE_STRING"
+    exit 1
+}
 
 # $1: the command to execute
 # $2: the label for the command
 # $3: the number of samples to be generated
-function execute() {
+function execute {
     for i in $(seq 1 $3)
     do
         $1 $i >> $OUTPUT_FILE
@@ -26,14 +29,27 @@ function execute() {
     done
 }
 
-echo 'Compiling signal generators with gcc...'
-mkdir build 2>/dev/null
-cd build
-cmake ../src
-make
-cd ../dist
+if [[ "${#@}" -eq "5" ]]; then
+    pink_count=$1
+    brown_count=$2
+    laplace_count=$3
+    uniform_count=$4
+    exponential_count=$5
+elif [[ "${#@}" -eq "1" ]]; then
+    pink_count=$1
+    brown_count=$1
+    laplace_count=$1
+    uniform_count=$1
+    exponential_count=$1
+else
+    print_usage
+fi
 
-rm "$OUTPUT_FILE" 2>/dev/null
+echo 'Compiling signal generators with gcc...'
+make all
+cd out
+
+rm -f "$OUTPUT_FILE"
 
 echo "Generating $pink_count sample(s) with pinkgen..."
 execute "./pinkgen 10 $SAMPLE_LENGTH 1.0" 1 $pink_count

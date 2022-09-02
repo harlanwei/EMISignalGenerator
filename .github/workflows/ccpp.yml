@@ -9,5 +9,5 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: CMake
-      run: mkdir build && cd build && cmake ../src && make
+    - name: Test build
+      run: make all
